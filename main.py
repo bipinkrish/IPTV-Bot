@@ -22,7 +22,7 @@ def refresh():
     streams = get("https://iptv-org.github.io/api/streams.json").json()
     online = []
     for stream in streams: 
-        if stream.get("status","") == "online" and stream.get("channel",None) is not None:
+        if stream.get("status","online") == "online" and stream.get("channel",None) is not None:
             channel_id = stream["channel"]
             if channel_id in CHANNELS_BY_ID.keys():
                 channel = CHANNELS_BY_ID[channel_id]
@@ -35,11 +35,9 @@ def refresh():
 STREAM_LINK = os.environ.get("STREAM") or CONFIGDATA.get("STREAM", "")
 STREAMS = refresh()
 
-
 # settings
 COLMS = 2
 ROWS = 15
-
 
 # text
 @app.on_message(filters.text)
