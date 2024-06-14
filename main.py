@@ -39,6 +39,11 @@ STREAMS = refresh()
 COLMS = 2
 ROWS = 15
 
+@app.on_message(filters.command(["start"]))
+def echo(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
+    app.send_message(message.chat.id,
+        f"__Hello {message.from_user.mention}, Watch IPTV streams right in Telegram App, send name of the channel bot will respond with available streams to watch, There are 6000+ online streams available from all over the world all the time.\nSource: https://github.com/iptv-org/api__", reply_to_message_id=message.id, disable_web_page_preview=True)
+
 # text
 @app.on_message(filters.text)
 def tvname(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
